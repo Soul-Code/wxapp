@@ -63,12 +63,12 @@ Page({
         if (res.code) {
           // 发起网络请求
           wx.request({
-            url: 'http://106.14.11.222:8080/wxapp/login',
+            url: 'http://106.14.11.222/wxapp/login',
             data: {
               code: res.code
             },
             success: function(req){
-              console.log('login_successful')
+              console.log('连接服务器成功')
               console.log(req);
             }
           })

@@ -163,6 +163,12 @@ Page({
   onShareAppMessage: function () {
   
   },
+  upper: function (){
+    console.log('已经拉到顶了');
+  },
+  lower: function (){
+    console.log('已经拉到底下了');
+  },
    
   bindItemTap: function () {
     wx.navigateTo({
