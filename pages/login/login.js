@@ -105,19 +105,23 @@ Page({
       isAgree: !!e.detail.value.length
     });
   },
+  formSubmit:function(e){
+    var data = e.detail.value;
+    getdata: data
+    console.log(data)
+  },
     judge: function () {
-      wx.request({
-        url: 'http://106.14.11.222:8080/wxapp/login',
-        data: {
-          code: res.code
-        },
-        success: function (req) {
-          console.log('login_successful')
-          console.log(req);
-        }
-      })
+      // wx.request({
+      //   url: 'http://106.14.11.222:8080/wxapp/login',
+      //   data: {
+      //     code: res.code
+      //   },
+      //   success: function (req) {
+      //     console.log('login_successful')
+      //     console.log(req);
+      //   }
+      // })
     this.showTopTips();
-
   },
     
 });
