@@ -24,10 +24,6 @@
         "text": "帖子"
       },
       {
-        "pagePath": "pages/login/login",
-        "text": "登陆"
-      },
-      {
         "pagePath": "pages/logs/logs",
         "text": "日志"
       }

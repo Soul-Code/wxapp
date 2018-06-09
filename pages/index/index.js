@@ -21,12 +21,14 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
+          iv:res.iv,
+          encryptedData:res.encryptedData,
           hasUserInfo: true
         })
       }
@@ -37,6 +39,8 @@ Page({
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
+            iv: res.iv,
+            encryptedData: res.encryptedData,
             hasUserInfo: true
           })
         }
@@ -44,7 +48,6 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -52,8 +55,7 @@ Page({
     })
   },
   clickMe: function(){
-    console.log(this);
-    
+    let that = this
     this.setData({
       motto:"你点了我一下"
       }
@@ -65,11 +67,31 @@ Page({
           wx.request({
             url: 'http://106.14.11.222:8080/wxapp/login',
             data: {
-              code: res.code
+              code: res.code,
+              encryptedData: that.data.encryptedData,
+              iv: that.data.iv,
             },
             success: function(req){
               console.log('连接服务器成功')
               console.log(req);
+              wx.setStorageSync('cookieKey', req.header['Set-Cookie'])
+
+              if (!req.data.exists) {
+                console.log("将要跳转到登陆页")
+                wx.navigateTo({
+                  url: '../login/login',
+                })
+              }
+              else {
+                console.log("将要跳转到帖子页")
+                wx.switchTab({
+                  url: '../detail/detail',
+                  fail: function () {
+                    console.info("跳转到帖子页失败")
+                  }
+                })
+              }
+
             }
           })
           console.log(res);
@@ -79,7 +101,6 @@ Page({
         }
       }
     });
-
 
 
 
