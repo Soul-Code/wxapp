@@ -9,14 +9,15 @@
 
       
 
-        <view class="weui-cells__title">表单</view>
+        <form bindsubmit='formSubmit'>
+        <view class="weui-cells__title">请输入学号和密码进行绑定</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
-                    <view class="weui-label">学号</view>
+                    <view  class="weui-label">学号</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入学号"/>
+                    <input auto-focus='true' maxlength='8' type="number" name='stdid' class="weui-input" placeholder="请输入学号"/>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input weui-cell_vcode">
@@ -24,20 +25,18 @@
                     <view class="weui-label">密码</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入密码" type='password'/>
+                    <input type='password' name='stdpsword' class="weui-input" placeholder="请输入密码"/>
                 </view>
             </view>
-          
-           
-            
         </view>
-        <view class="weui-cells__tips">底部说明文字底部说明文字</view>
+        <view class="weui-btn-area">
+            <button  form-type="submit" class="weui-btn" type="primary" >绑定</button>
+        </view>
+        </form>
+        <!-- <view class="weui-cells__tips">底部说明文字底部说明文字</view> -->
 
       
         
 
-        <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" bindtap="judge">绑定</button>
-        </view>
     </view>
 </view>

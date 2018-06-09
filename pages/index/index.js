@@ -63,7 +63,7 @@ Page({
         if (res.code) {
           // 发起网络请求
           wx.request({
-            url: 'http://106.14.11.222/wxapp/login',
+            url: 'http://106.14.11.222:8080/wxapp/login',
             data: {
               code: res.code
             },
