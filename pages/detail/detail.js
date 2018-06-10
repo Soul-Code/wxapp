@@ -121,7 +121,6 @@ Page({
     wx.request({
       url: 'http://106.14.11.222:8080/wxapp/get_list',
       header:header,
-      data: {'nickName':app.globalData.userInfo.nickName},
       success: function(req){
         console.log(req);
       }

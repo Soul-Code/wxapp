@@ -17,6 +17,13 @@ Page({
       });
     }, 3000);//显示接口
   },
+  showErr: function(str) {
+
+    this.setData({
+      errMsg: str
+    });
+    this.showTopTips();
+  },
 
 
 
@@ -26,10 +33,7 @@ Page({
   formSubmit: function (e) {
     var that = this;
     if(e.detail.value.stdid.length<8){
-      that.setData({
-        errMsg: '学号输入有误，请重新输入'
-      });
-      this.showTopTips();
+      that.showErr('学号输入有误，请重新输入');
     }
     else{
       console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -47,13 +51,23 @@ Page({
         header: header,
         data: that.data.stdinfo,
         success: function (req) {
-          console.log('传送成功');
-          wx.switchTab({
-            url: '../detail/detail',
-            fail: function () {
-              console.info("跳转到帖子页失败")
-            }
-          })
+          if (req.data.bunded){
+            console.log(req)
+            console.log('绑定成功,准备跳转到详情页');
+            wx.switchTab({
+              url: '../detail/detail',
+              fail: function () {
+                console.info("跳转到帖子页失败")
+              }
+            })
+          }
+          else{
+            that.showErr('学号或密码错误');
+          }
+        },
+        fail:function(){
+          that.showErr('服务器请求失败');
+          console.log('请求失败')
         }
       })
 
