@@ -1,4 +1,5 @@
 // pages/login.js
+const app = getApp();
 Page({
   data: {
     showTopTips: false,
@@ -47,7 +48,7 @@ Page({
         header.Cookie = cookie;
       }
       wx.request({
-        url: 'http://106.14.11.222:8080/wxapp/bund',
+        url: app.globalData.url + '/wxapp/bund',
         header: header,
         data: that.data.stdinfo,
         success: function (req) {

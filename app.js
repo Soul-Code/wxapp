@@ -33,6 +33,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    url:'http://106.14.11.222',
+    openid:'',
   }
 })

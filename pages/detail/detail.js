@@ -1,4 +1,5 @@
 // pages/detail/detail.js
+const app = getApp();
 Page({
   data: {
     feed: [
@@ -112,15 +113,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let app = getApp();
+    
     let cookie = wx.getStorageSync('cookieKey');
     let header = {};
     if(cookie){
       header.Cookie = cookie;
     }
     wx.request({
-      url: 'http://106.14.11.222:8080/wxapp/get_list',
+      url: app.globalData.url + '/wxapp/get_list',
       header:header,
+      data: {
+        'openid': app.globalData.openid, 
+        'nickName': app.globalData.userInfo.nickName
+      },
       success: function(req){
         console.log(req);
       }

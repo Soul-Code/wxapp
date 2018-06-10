@@ -16,6 +16,7 @@ Page({
     })
   },
   onLoad: function () {
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -65,7 +66,7 @@ Page({
         if (res.code) {
           // 发起网络请求
           wx.request({
-            url: 'http://106.14.11.222:8080/wxapp/login',
+            url: app.globalData.url+ '/wxapp/login',
             data: {
               code: res.code,
               encryptedData: that.data.encryptedData,
@@ -74,7 +75,8 @@ Page({
             success: function(req){
               console.log('连接服务器成功')
               console.log(req);
-              wx.setStorageSync('cookieKey', req.header['Set-Cookie'])
+              app.globalData.openid = req.data.openid;
+              wx.setStorageSync('cookieKey', req.header['Set-Cookie']);
 
               if (!req.data.exists) {
                 console.log("将要跳转到登陆页")
